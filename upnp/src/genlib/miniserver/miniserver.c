@@ -299,6 +299,11 @@ static int dispatch_request(
 		"DEBUG TEST: Redirect host_port = %s.\n",
 		host_port);
 		#endif
+	/* check existence of ORIGIN header -- prevents inappropriate actors(browser) from doing anything. */
+	if (httpmsg_find_hdr_str(request, "ORIGIN")) {
+		rc = UPNP_E_BAD_HTTPMSG;
+		goto ExitFunction;
+	}
 	/* chech HOST header for an IP number -- prevents DNS rebinding. */
 	if (!httpmsg_find_hdr(request, HDR_HOST, &header)) {
 		rc = UPNP_E_BAD_HTTPMSG;
