@@ -116,7 +116,7 @@ static void ixmlPrintDomTreeRecursive(
 			ixml_membuf_append_str(buf, nodeName);
 			ixml_membuf_append_str(buf, " ");
 			copy_with_escape(buf, nodeValue);
-			ixml_membuf_append_str(buf, "?>\n");
+			ixml_membuf_append_str(buf, "?>");
 			break;
 
 		case eDOCUMENT_NODE:
@@ -147,7 +147,7 @@ static void ixmlPrintDomTreeRecursive(
 			child = ixmlNode_getFirstChild(nodeptr);
 			if (child != NULL &&
 				ixmlNode_getNodeType(child) == eELEMENT_NODE) {
-				ixml_membuf_append_str(buf, ">\r\n");
+				ixml_membuf_append_str(buf, ">");
 			} else {
 				ixml_membuf_append_str(buf, ">");
 			}
@@ -164,7 +164,7 @@ static void ixmlPrintDomTreeRecursive(
 				ixmlNode_getNodeType(sibling) == eTEXT_NODE) {
 				ixml_membuf_append_str(buf, ">");
 			} else {
-				ixml_membuf_append_str(buf, ">\r\n");
+				ixml_membuf_append_str(buf, ">");
 			}
 			ixmlPrintDomTreeRecursive(
 				ixmlNode_getNextSibling(nodeptr), buf);
@@ -228,7 +228,7 @@ static void ixmlPrintDomTree(
 		child = ixmlNode_getFirstChild(nodeptr);
 		if (child != NULL &&
 			ixmlNode_getNodeType(child) == eELEMENT_NODE) {
-			ixml_membuf_append_str(buf, ">\r\n");
+			ixml_membuf_append_str(buf, ">");
 		} else {
 			ixml_membuf_append_str(buf, ">");
 		}
@@ -239,7 +239,7 @@ static void ixmlPrintDomTree(
 		/* Done with children. Output the end tag. */
 		ixml_membuf_append_str(buf, "</");
 		ixml_membuf_append_str(buf, nodeName);
-		ixml_membuf_append_str(buf, ">\r\n");
+		ixml_membuf_append_str(buf, ">");
 		break;
 
 	default:
@@ -353,7 +353,7 @@ DOMString ixmlPrintDocument(IXML_Document *doc)
 	}
 
 	ixml_membuf_init(buf);
-	ixml_membuf_append_str(buf, "<?xml version=\"1.0\"?>\r\n");
+	ixml_membuf_append_str(buf, "<?xml version=\"1.0\"?>");
 	ixmlPrintDomTree(rootNode, buf);
 
 	return buf->buf;
@@ -385,7 +385,7 @@ DOMString ixmlDocumenttoString(IXML_Document *doc)
 	}
 
 	ixml_membuf_init(buf);
-	ixml_membuf_append_str(buf, "<?xml version=\"1.0\"?>\r\n");
+	ixml_membuf_append_str(buf, "<?xml version=\"1.0\"?>");
 	ixmlDomTreetoString(rootNode, buf);
 
 	return buf->buf;
